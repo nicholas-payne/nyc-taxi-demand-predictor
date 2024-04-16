@@ -77,7 +77,7 @@ def scrape_data():
              .orderBy(["pickup_hour","PULocationID"])
 
          df_agg_pandas = df_agg.toPandas()
-         csv_filepath = path + '/' + 'agg_taxi_data_{ym[0]}_{ym[1]:02d}.csv'
+         csv_filepath = folder + '/' + f'agg_taxi_data_{ym[0]}_{ym[1]:02d}.csv'
          df_agg_pandas.to_csv(csv_filepath)
 
          os.remove(filepath)
