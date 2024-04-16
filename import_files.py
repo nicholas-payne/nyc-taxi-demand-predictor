@@ -1,7 +1,6 @@
 import wget
 import os
 import pyspark
-from pyspark.sql import SQLContext
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import date_trunc,expr,unix_timestamp,extract,lit
 import itertools as it
@@ -53,11 +52,8 @@ def scrape_data():
             .config('spark.executor.memory', '5gb') \
             .config("spark.cores.max", "6") \
             .getOrCreate()
-         sc = spark.sparkContext
-
-         sqlContext = SQLContext(sc)
-
-         df = sqlContext.read.parquet(f'yellow_tripdata_{ym[0]}-{ym[1]:02d}.parquet')
+         
+         df = spark.read.parquet(filepath)
 
          df_filtered = df \
             .select(
@@ -81,9 +77,10 @@ def scrape_data():
              .orderBy(["pickup_hour","PULocationID"])
 
          df_agg_pandas = df_agg.toPandas()
-         df_agg_pandas.to_csv(f'agg_taxi_data_{ym[0]}_{ym[1]:02d}.csv')
+         csv_filepath = path + '/' + 'agg_taxi_data_{ym[0]}_{ym[1]:02d}.csv'
+         df_agg_pandas.to_csv(csv_filepath)
 
-         os.remove(f'yellow_tripdata_{ym[0]}-{ym[1]:02d}.parquet')
+         os.remove(filepath)
 
 if __name__ == '__main__':
     scrape_data()
