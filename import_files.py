@@ -20,14 +20,31 @@ def scrape_data():
 
     # Limited Sample of Data for Testing #
     years = [2013]
-    months = [1,2]
+    months = [3]
     ######################################
 
     ym_list = list(it.product(years,months))
+    
+    while True:        
+        folder = input("Enter path to download files: ")
+        
+        if os.path.exists(folder):
+            print(f'Files will be downloaded to {folder}')
+            
+            approval = input('y/n? ')
+            
+            if approval == 'y':
+                print('Commencing download')
+                break
+
+        else:
+           print(f'{filepath} is an invalid file path')
 
     for ym in ym_list:
          url = f"https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_{ym[0]}-{ym[1]:02d}.parquet"
-         filepath = f"yellow_tripdata_{ym[0]}-{ym[1]:02d}.parquet"
+         filename = f"yellow_tripdata_{ym[0]}-{ym[1]:02d}.parquet"
+         filepath = folder + '/' + filename
+         
          wget.download(url, filepath)
                   
          spark = SparkSession.builder \
