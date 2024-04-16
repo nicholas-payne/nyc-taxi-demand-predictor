@@ -14,12 +14,12 @@ def scrape_data():
     '''
     # Full Range of Data Here #
     #years = range(2009,2024)
-    #months = range(1,13)
+    months = range(1,13)
     ###########################
 
     # Limited Sample of Data for Testing #
     years = [2013]
-    months = [3]
+    #months = [3]
     ######################################
 
     ym_list = list(it.product(years,months))
