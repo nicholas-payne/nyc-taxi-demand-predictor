@@ -13,12 +13,12 @@ def scrape_data():
     so the script may take a while to run
     '''
     # Full Range of Data Here #
-    #years = range(2009,2024)
+    years = range(2009,2024)
     months = range(1,13)
     ###########################
 
     # Limited Sample of Data for Testing #
-    years = [2013]
+    #years = [2013]
     #months = [3]
     ######################################
 
