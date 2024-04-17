@@ -1,6 +1,5 @@
 import wget
 import os
-import pyspark
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import date_trunc,expr,unix_timestamp,extract,lit
 import itertools as it
