@@ -3,6 +3,7 @@ import os
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import date_trunc,expr,unix_timestamp,extract,lit
 import itertools as it
+from tkinter.filedialog import askdirectory
 
 def scrape_data():
 
@@ -12,28 +13,27 @@ def scrape_data():
     so the script may take a while to run
     '''
     # Full Range of Data Here #
-    years = range(2009,2024)
+    years = range(2014,2024)
     months = range(1,13)
     ###########################
 
     # Limited Sample of Data for Testing #
     #years = [2013]
-    #months = [3]
+    #months = [1,2,3]
     ######################################
 
     ym_list = list(it.product(years,months))
     
     while True:        
-        folder = input("Enter path to download files: ")
+        folder = askdirectory()
         
-        if os.path.exists(folder):
-            print(f'Files will be downloaded to {folder}')
-            
-            approval = input('y/n? ')
-            
-            if approval == 'y':
-                print('Commencing download')
-                break
+        print(f'Files will be downloaded to {folder}')
+        
+        approval = input('y/n? ')
+        
+        if approval == 'y':
+            print('Commencing download')
+            break
 
         else:
            print(f'{filepath} is an invalid file path')
