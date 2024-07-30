@@ -36,7 +36,7 @@ def scrape_data():
             break
 
         else:
-           print(f'{filepath} is an invalid file path')
+           print(f'{folder} is an invalid file path')
 
     for ym in ym_list:
          url = f"https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_{ym[0]}-{ym[1]:02d}.parquet"
